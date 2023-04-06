@@ -1,7 +1,22 @@
 .HomepagePopup {
-  height: 60px;
+  height: 0;
 
   background: linear-gradient(180deg, #bb1e1e 71.29%, #b21919 99.95%);
+
+  overflow: hidden;
+  animation-name: slideIn;
+  animation-duration: 750ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: forwards;
+
+  @keyframes slideIn {
+    from {
+      height: 0;
+    }
+    to {
+      height: 60px;
+    }
+  }
 
   &_overlay {
     height: 100%;
@@ -13,7 +28,8 @@
   }
 
   &-Inner {
-    max-width: 1100px;
+    max-width: 1120px;
+    padding: 0 20px;
     margin: 0 auto;
     height: 100%;
 

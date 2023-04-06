@@ -1,7 +1,13 @@
+import { FC } from "react";
 import Button from "../Button/Button";
 import styles from "./HomepagePopup.module.scss";
 
-const HomepagePopup = () => {
+const HomepagePopup: FC<HomepagePopupProps> = ({ setIsDisplayed }) => {
+  function handleDisplay() {
+    localStorage.setItem("displayToken", "activated");
+    setIsDisplayed(false);
+  }
+
   return (
     <div className={styles["HomepagePopup"]}>
       <div className={styles["HomepagePopup_overlay"]}>
@@ -11,20 +17,22 @@ const HomepagePopup = () => {
             <p className={styles["HomepagePopup-Subtitle"]}>Every day discover what’s trending on the internet!</p>
           </div>
           <div className={styles["HomepagePopup-Container"]}>
-            <Button
-              isSecondary
-              handleClick={function (): {} {
-                throw new Error("Function not implemented.");
-              }}
-            >
+            <Button isSecondary handleClick={handleDisplay}>
               get
             </Button>
-            <p className={styles["HomepagePopup-Title"]}>No, thanks</p>
+            <Button isTertiary handleClick={handleDisplay}>
+              No, thanks
+            </Button>
           </div>
         </div>
       </div>
     </div>
   );
 };
+
+interface HomepagePopupProps {
+  isDisplayed?: boolean;
+  setIsDisplayed?: any;
+}
 
 export default HomepagePopup;
