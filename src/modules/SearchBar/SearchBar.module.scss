@@ -1,0 +1,30 @@
+.SearchBar {
+  width: 100%;
+  padding: 12px 16px;
+
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 0px 1px 2px -1px #c8cad1;
+
+  flex-grow: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  @media (min-width: 768px) {
+    max-width: 725px;
+    padding: 5px 5px 5px 15px;
+  }
+
+  &-Input {
+    font-family: InterV;
+    width: 100%;
+    border: none;
+    outline: none;
+    line-height: 16px;
+
+    @media (min-width: 768px) {
+    }
+  }
+}
