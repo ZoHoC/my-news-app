@@ -1,12 +1,16 @@
 import { FC, ReactNode } from "react";
 import styles from "./Button.module.scss";
+import { BlobOptions } from "buffer";
 
-const Button: FC<ButtonProps> = ({ isSecondary = false, handleClick, children }) => {
+const Button: FC<ButtonProps> = ({ isSecondary = false, isTertiary = false, handleClick, children }) => {
   let modifierClass = "";
 
   switch (true) {
     case isSecondary:
       modifierClass = `${styles["Button"]} ${styles["Button_secondary"]}`;
+      break;
+    case isTertiary:
+      modifierClass = `${styles["Button"]} ${styles["Button_tertiary"]}`;
       break;
     default:
       modifierClass = styles["Button"];
@@ -21,8 +25,9 @@ const Button: FC<ButtonProps> = ({ isSecondary = false, handleClick, children })
 };
 
 interface ButtonProps {
-  isSecondary: boolean;
+  isSecondary?: boolean;
+  isTertiary?: boolean;
   children: ReactNode;
-  handleClick: () => {};
+  handleClick?: any;
 }
 export default Button;

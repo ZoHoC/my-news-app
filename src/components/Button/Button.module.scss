@@ -1,4 +1,5 @@
 .Button {
+  font-family: InterV;
   display: inline-block;
   width: 95px;
   height: 40px;
@@ -30,5 +31,20 @@
 
     background-color: #ffffff;
     color: #1d1d1b;
+  }
+
+  &_tertiary {
+    width: inherit;
+    color: #ffffff;
+    background: none;
+
+    font-weight: 500;
+    line-height: 21px;
+    text-transform: none;
+    text-decoration: underline;
+
+    &:hover {
+      box-shadow: none;
+    }
   }
 }
