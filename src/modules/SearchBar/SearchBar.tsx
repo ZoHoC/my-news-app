@@ -1,6 +1,6 @@
 import styles from "./SearchBar.module.scss";
 import SearchIcon from "../../../public/assets/icons/SearchIcon.svg";
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "@/components/Button/Button";
 
 const SearchBar = () => {
@@ -28,7 +28,7 @@ const SearchBar = () => {
 
   return (
     <div className={styles["SearchBar"]}>
-      <SearchIcon width="16px" height="16px" fill="#A5A5A4" />
+      <SearchIcon width="20" height="20" fill="#A5A5A4" />
       <input placeholder={`Search news`} className={styles["SearchBar-Input"]} />
       {windowWidth > 768 && <Button>search</Button>}
     </div>
