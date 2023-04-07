@@ -2,7 +2,7 @@ import { FC, ReactNode } from "react";
 import styles from "./Button.module.scss";
 
 const Button: FC<ButtonProps> = ({ isSecondary = false, isTertiary = false, handleClick, children }) => {
-  let modifierClass = "";
+  let modifierClass = styles["Button"];
 
   switch (true) {
     case isSecondary:
@@ -12,7 +12,7 @@ const Button: FC<ButtonProps> = ({ isSecondary = false, isTertiary = false, hand
       modifierClass = `${styles["Button"]} ${styles["Button_tertiary"]}`;
       break;
     default:
-      modifierClass = styles["Button"];
+      modifierClass;
       break;
   }
 

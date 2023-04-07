@@ -1,7 +1,11 @@
+import { useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./Header.module.scss";
+import { Squash as Hamburger } from "hamburger-react";
 
 const Header = () => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+
   return (
     <header className={styles["Header"]}>
       <div className={styles["Header-Inner"]}>
@@ -9,7 +13,7 @@ const Header = () => {
           <p className={styles["Header-Title"]}>
             <span className={styles["Header-Title_accent"]}>My</span>News
           </p>
-          <div className={styles["Haburger"]}></div>
+          <Hamburger size={24} color="#1D1D1B" toggled={isOpen} toggle={setOpen} rounded hideOutline={false} />
         </div>
         <SearchBar />
       </div>
