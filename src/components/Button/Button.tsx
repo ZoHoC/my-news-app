@@ -1,6 +1,5 @@
 import { FC, ReactNode } from "react";
 import styles from "./Button.module.scss";
-import { BlobOptions } from "buffer";
 
 const Button: FC<ButtonProps> = ({ isSecondary = false, isTertiary = false, handleClick, children }) => {
   let modifierClass = "";
