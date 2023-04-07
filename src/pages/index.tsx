@@ -1,7 +1,6 @@
 import Button from "@/components/Button/Button";
 import HomepagePopup from "@/components/HomepagePopup/HomepagePopup";
 import Header from "@/modules/Header/Header";
-import SearchBar from "@/modules/SearchBar/SearchBar";
 
 import Head from "next/head";
 import { useEffect, useState } from "react";
