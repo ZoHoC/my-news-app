@@ -1,0 +1,28 @@
+@use "@/styles/abstracts/index.module" as *;
+
+.NavBar {
+  margin: 0 auto;
+  padding: 28px;
+
+  display: flex;
+  justify-content: center;
+
+  &-Grid {
+    display: grid;
+    gap: 16px;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    @include mobileLarge {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @include tablet {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    @include desktop {
+      grid-template-columns: 1fr;
+    }
+  }
+}
