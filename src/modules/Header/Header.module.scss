@@ -43,7 +43,7 @@
     line-height: 29px;
 
     &_accent {
-      color: accent-color;
+      color: $accent-color;
     }
 
     @media (min-width: 768px) {

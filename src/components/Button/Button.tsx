@@ -32,6 +32,6 @@ interface ButtonProps {
   isSecondary?: boolean;
   isTertiary?: boolean;
   children: ReactNode;
-  handleClick: MouseEventHandler<HTMLButtonElement>;
+  handleClick?: MouseEventHandler<HTMLButtonElement>;
 }
 export default Button;

@@ -7,6 +7,7 @@ export default {
   primaryBgColor: "#f2f2f2",
   secondaryBgColor: "#ffffff",
   tertiaryBgColor: "#8d8d8c",
+  quaternaryBgColor: "#F4F5F8",
   accentBgColor: "#bb1e1e",
   accentBgGradientColor: "#b21919",
 };
