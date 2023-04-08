@@ -1,0 +1,20 @@
+@use "@/styles/abstracts/index.module" as *;
+
+.ToggleNews {
+  padding: 16px 0 26px;
+
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+
+  &-Text {
+    padding: 10px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+
+    &_pressed {
+      color: $accent-color;
+      background-color: rgba(187, 30, 30, 0.24);
+    }
+  }
+}
