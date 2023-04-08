@@ -1,5 +1,5 @@
-import Button from "@/components/Button/Button";
 import HomepagePopup from "@/components/HomepagePopup/HomepagePopup";
+import NavBar from "@/modules/NavBar/NavBar";
 import Header from "@/modules/Header/Header";
 
 import Head from "next/head";
@@ -22,8 +22,14 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {isDisplayed && <HomepagePopup isDisplayed={isDisplayed} setIsDisplayed={setIsDisplayed} />}
+      {isDisplayed && (
+        <HomepagePopup
+          isDisplayed={isDisplayed}
+          setIsDisplayed={setIsDisplayed}
+        />
+      )}
       <Header />
+      <NavBar />
     </>
   );
 }

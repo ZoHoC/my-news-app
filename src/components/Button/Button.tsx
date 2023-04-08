@@ -1,7 +1,12 @@
-import { FC, ReactNode } from "react";
+import { FC, MouseEventHandler, ReactNode } from "react";
 import styles from "./Button.module.scss";
 
-const Button: FC<ButtonProps> = ({ isSecondary = false, isTertiary = false, handleClick, children }) => {
+const Button: FC<ButtonProps> = ({
+  isSecondary = false,
+  isTertiary = false,
+  handleClick,
+  children,
+}) => {
   let modifierClass = styles["Button"];
 
   switch (true) {
@@ -27,6 +32,6 @@ interface ButtonProps {
   isSecondary?: boolean;
   isTertiary?: boolean;
   children: ReactNode;
-  handleClick?: any;
+  handleClick: MouseEventHandler<HTMLButtonElement>;
 }
 export default Button;

@@ -28,8 +28,11 @@ const SearchBar = () => {
 
   return (
     <div className={styles["SearchBar"]}>
-      <SearchIcon width="20" height="20" fill="#A5A5A4" />
-      <input placeholder={`Search news`} className={styles["SearchBar-Input"]} />
+      <SearchIcon />
+      <input
+        placeholder={`Search news`}
+        className={styles["SearchBar-Input"]}
+      />
       {windowWidth > 768 && <Button>search</Button>}
     </div>
   );

@@ -12,9 +12,15 @@ const HomepagePopup: FC<HomepagePopupProps> = ({ setIsDisplayed }) => {
     <div className={styles["HomepagePopup"]}>
       <div className={styles["HomepagePopup_overlay"]}>
         <div className={styles["HomepagePopup-Inner"]}>
-          <div className={` ${styles["HomepagePopup-Container"]} ${styles["HomepagePopup-Container_gap"]}`}>
-            <p className={styles["HomepagePopup-Title"]}>Make MyNews your homepage</p>
-            <p className={styles["HomepagePopup-Subtitle"]}>Every day discover what’s trending on the internet!</p>
+          <div
+            className={` ${styles["HomepagePopup-Container"]} ${styles["HomepagePopup-Container_gap"]}`}
+          >
+            <p className={styles["HomepagePopup-Title"]}>
+              Make MyNews your homepage
+            </p>
+            <p className={styles["HomepagePopup-Subtitle"]}>
+              Every day discover what’s trending on the internet!
+            </p>
           </div>
           <div className={styles["HomepagePopup-Container"]}>
             <Button isSecondary handleClick={handleDisplay}>
@@ -31,8 +37,7 @@ const HomepagePopup: FC<HomepagePopupProps> = ({ setIsDisplayed }) => {
 };
 
 interface HomepagePopupProps {
-  isDisplayed?: boolean;
-  setIsDisplayed?: any;
+  setIsDisplayed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default HomepagePopup;

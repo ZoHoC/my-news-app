@@ -1,3 +1,5 @@
+@use "@/styles/abstracts/index.module" as *;
+
 .Header {
   display: flex;
   justify-content: center;
@@ -10,11 +12,11 @@
     flex-direction: column;
     align-items: center;
 
-    @media (min-width: 768px) {
+    @include tablet {
       max-width: 1100px;
       margin: 0 20px;
       padding: 35px 0 28px;
-      border-bottom: 1px solid #979797;
+      border-bottom: 1px solid $tertiary-color;
 
       flex-direction: row;
       gap: 44px;
@@ -28,20 +30,20 @@
     justify-content: space-between;
     align-items: center;
 
-    @media (min-width: 768px) {
+    @include tablet {
       width: initial;
       margin-bottom: 0;
     }
   }
 
   &-Title {
-    color: #1d1d1b;
+    color: $primary-color;
     font-weight: 900;
     font-size: 24px;
     line-height: 29px;
 
     &_accent {
-      color: #bb1e1e;
+      color: accent-color;
     }
 
     @media (min-width: 768px) {
@@ -49,10 +51,4 @@
       line-height: 39px;
     }
   }
-}
-
-.Haburger {
-  width: 24px;
-  height: 20px;
-  background-color: black;
 }
