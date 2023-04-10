@@ -1,14 +1,21 @@
+import { FC } from "react";
 import styles from "./LatestNewsArticle.module.scss";
 
-const LatestNewsArticle = () => {
+const LatestNewsArticle: FC<LatestNewsArticleProps> = ({
+  publishedDate,
+  title,
+}) => {
   return (
     <article className={styles["LatestNewsArticle"]}>
-      <p className={styles["LatestNewsArticle-Time"]}>14:30</p>
-      <h3 className={styles["LatestNewsArticle-Title"]}>
-        Maintain Your Pc S Performance With Pc Programs
-      </h3>
+      <p className={styles["LatestNewsArticle-Time"]}>{publishedDate}</p>
+      <h3 className={styles["LatestNewsArticle-Title"]}>{title}</h3>
     </article>
   );
 };
+
+interface LatestNewsArticleProps {
+  publishedDate: string;
+  title: string;
+}
 
 export default LatestNewsArticle;
