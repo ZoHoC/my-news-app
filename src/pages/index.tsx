@@ -1,12 +1,34 @@
-import HomepagePopup from "@/components/HomepagePopup/HomepagePopup";
-import NavBar from "@/modules/NavBar/NavBar";
-import Header from "@/modules/Header/Header";
-
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import HomepagePopup from "@/components/HomepagePopup/HomepagePopup";
+import Header from "@/modules/Header/Header";
+import Section from "@/components/Section/Section";
+import NavBar from "@/modules/NavBar/NavBar";
+import Grid from "@/components/Grid/Grid";
+import LatestNews from "@/modules/LatestNews/LatestNews";
+import { setWindowWidth } from "@/redux/reducer/windowSizeReducer";
+import Article from "@/components/Article/Article";
+import { fetchNewsData } from "@/redux/actions/fetchNewsDataAction";
+import { useAppDispatch, useAppSelector } from "@/utility/hooks";
 
 export default function Home() {
   const [isDisplayed, setIsDisplayed] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
+
+  const dispatch = useAppDispatch();
+  const { windowWidth } = useAppSelector(state => state.windowSize);
+  const { newsData } = useAppSelector(state => state.news);
+
+  useEffect(() => {
+    dispatch(setWindowWidth(window.innerWidth));
+    dispatch(fetchNewsData());
+  }, []);
+
+  useEffect(() => {
+    const handleResize = () => dispatch(setWindowWidth(window.innerWidth));
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const isDisplayedToken = localStorage.getItem("displayToken") === null;
@@ -22,14 +44,28 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {isDisplayed && (
-        <HomepagePopup
-          isDisplayed={isDisplayed}
-          setIsDisplayed={setIsDisplayed}
-        />
+      {windowWidth > 1200 && isDisplayed && (
+        <HomepagePopup setIsDisplayed={setIsDisplayed} />
       )}
-      <Header />
-      <NavBar />
+      <Header windowWidth={windowWidth} isOpen={isOpen} setOpen={setOpen} />
+      <Section>
+        {windowWidth > 768 && <NavBar />}
+        <Grid title={windowWidth > 768 ? "News" : ""}>
+          {windowWidth > 768 && <LatestNews />}
+          {newsData.map(
+            ({ id, section, title, imageCaption, imageUrl, author }) => (
+              <Article
+                key={id}
+                title={title}
+                section={section}
+                imageCaption={imageCaption}
+                imageUrl={imageUrl}
+                author={author}
+              />
+            )
+          )}
+        </Grid>
+      </Section>
     </>
   );
 }
