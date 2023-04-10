@@ -2,7 +2,8 @@
 
 .Header {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 
   &-Inner {
     width: 100%;
@@ -30,6 +31,19 @@
     justify-content: space-between;
     align-items: center;
 
+    &_open {
+      flex-direction: column-reverse;
+
+      .Header-Title {
+        font-size: 32px;
+        line-height: 39px;
+      }
+
+      div {
+        align-self: flex-end;
+      }
+    }
+
     @include tablet {
       width: initial;
       margin-bottom: 0;
@@ -46,9 +60,19 @@
       color: $accent-color;
     }
 
-    @media (min-width: 768px) {
+    @include tablet {
       font-size: 32px;
       line-height: 39px;
     }
+  }
+
+  &-Navbar {
+    position: fixed;
+    top: 203px;
+    left: 0;
+    right: 0;
+    height: 1000px;
+    z-index: 99;
+    background-color: $primary-bg-color;
   }
 }

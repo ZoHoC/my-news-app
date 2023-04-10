@@ -7,11 +7,13 @@
 
   background-color: $secondary-bg-color;
 
+  grid-area: aside;
+
   @include mobileLarge {
     width: 343px;
   }
 
-  @include desktop {
+  @include desktopLarge {
     width: 321px;
   }
 

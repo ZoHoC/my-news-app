@@ -17,7 +17,7 @@
     fill: $tertiary-bg-color;
   }
 
-  @include desktop {
+  @include tablet {
     width: 63px;
     height: 63px;
   }
@@ -39,7 +39,7 @@
     color: $tertiary-bg-color;
     font-size: 14px;
 
-    @include desktop {
+    @include tablet {
       font-size: 12px;
     }
   }

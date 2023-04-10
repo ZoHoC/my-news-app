@@ -1,5 +1,5 @@
 export const toggleNewsData: toggleNewsDataItem[] = [
-  { id: 1, content: "Featured", isPressed: false },
+  { id: 1, content: "Featured", isPressed: true },
   { id: 2, content: "Latest", isPressed: false },
 ];
 

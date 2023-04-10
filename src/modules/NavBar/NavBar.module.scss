@@ -7,6 +7,11 @@
   display: flex;
   justify-content: center;
 
+  @include tablet {
+    margin: 0;
+    padding: 0;
+  }
+
   &-Grid {
     display: grid;
     gap: 16px;
@@ -18,10 +23,6 @@
     }
 
     @include tablet {
-      grid-template-columns: repeat(4, 1fr);
-    }
-
-    @include desktop {
       grid-template-columns: 1fr;
     }
   }

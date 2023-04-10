@@ -1,31 +1,9 @@
 import styles from "./SearchBar.module.scss";
 import SearchIcon from "../../../public/assets/icons/SearchIcon.svg";
-import { useEffect, useState } from "react";
 import Button from "@/components/Button/Button";
+import { FC } from "react";
 
-const SearchBar = () => {
-  //   const handleSearch = (e) => {
-  //     const newsTitle = e.target.value.toLowerCase();
-
-  //     const filteredNews = data.filter(news => news.title.toLowerCase().includes(newsTitle));
-
-  //     setNews(filteredNews);
-  //   };
-
-  //   onChange = { handleSearch };
-
-  const [windowWidth, setWindowWidth] = useState<number>(0);
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => setWindowWidth(window.innerWidth);
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
-
+const SearchBar: FC<SearchBarProps> = ({ windowWidth }) => {
   return (
     <div className={styles["SearchBar"]}>
       <SearchIcon />
@@ -37,5 +15,9 @@ const SearchBar = () => {
     </div>
   );
 };
+
+interface SearchBarProps {
+  windowWidth: number;
+}
 
 export default SearchBar;
