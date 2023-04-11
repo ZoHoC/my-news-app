@@ -18,30 +18,26 @@ const fetchNewsSlice = createSlice({
         state.error = null;
       })
       .addCase(fetchNewsData.fulfilled, (state, action) => {
-        state.newsData = action.payload.results.map((item: fetchItem) => {
-          const {
-            id,
-            published_date,
-            byline,
-            section,
-            title,
-            media: [
-              {
-                caption: imageCaption,
-                "media-metadata": [, , { url: imageUrl }],
-              },
-            ],
-          } = item;
-          return {
-            id,
-            publishedDate: published_date,
-            author: byline,
-            section,
-            title,
-            imageCaption,
-            imageUrl,
-          };
-        });
+        state.newsData = action.payload.results
+          .sort((a: any, b: any) => {
+            return (
+              new Date(b.published_date).getTime() -
+              new Date(a.published_date).getTime()
+            );
+          })
+          .map((item: fetchItem) => {
+            const { published_date, byline, section, title, multimedia } = item;
+            return {
+              publishedDate: published_date,
+              author: byline,
+              section,
+              title,
+              // returns the url/caption property of the third element of the multimedia array if it exists, and if not, returns null.
+              imageUrl: multimedia?.[2]?.url ?? null,
+              imageCaption: multimedia?.[2]?.caption ?? null,
+            };
+          });
+
         state.isLoading = false;
         state.error = null;
       })
@@ -53,33 +49,27 @@ const fetchNewsSlice = createSlice({
 });
 
 interface fetchItem {
-  id: string;
   published_date: string;
   byline: string;
   section: string;
   title: string;
   abstract: string;
-  media: Media[];
+  multimedia: Media[];
 }
 
 interface Media {
-  "media-metadata": MediaMetadata[];
+  url: string;
   caption: string;
 }
 
-interface MediaMetadata {
-  url: string;
-}
-
 export interface NewsItem {
-  id: string;
   publishedDate: string;
   author: string;
   section: string;
   title: string;
   abstract: string;
-  imageCaption: string;
   imageUrl: string;
+  imageCaption: string;
 }
 
 export interface NewsState {
