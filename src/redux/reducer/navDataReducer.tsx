@@ -7,7 +7,7 @@ const initialState: NavDataState = {
       id: 1,
       title: "Home",
       link: "/",
-      isPressed: false,
+      isPressed: true,
     },
     {
       id: 2,
