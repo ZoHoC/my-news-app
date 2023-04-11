@@ -1,11 +1,13 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./Header.module.scss";
 import { Squash as Hamburger } from "hamburger-react";
 import colorStyles from "@/styles/abstracts/colorStyles";
 import NavBar from "../NavBar/NavBar";
 
-const Header: FC<HeaderProps> = ({ windowWidth, isOpen, setOpen }) => {
+const Header: FC<HeaderProps> = ({ windowWidth, handleSearch }) => {
+  const [isOpen, setOpen] = useState<boolean>(false);
+
   useEffect(() => {
     document.body.style.overflow =
       windowWidth < 768 ? (isOpen ? "hidden" : "") : (setOpen(false), "");
@@ -35,7 +37,7 @@ const Header: FC<HeaderProps> = ({ windowWidth, isOpen, setOpen }) => {
             />
           )}
         </div>
-        <SearchBar windowWidth={windowWidth} />
+        <SearchBar windowWidth={windowWidth} handleSearch={handleSearch} />
       </div>
       {windowWidth < 768 && isOpen && (
         <div className={styles["Header-Navbar"]}>
@@ -48,8 +50,7 @@ const Header: FC<HeaderProps> = ({ windowWidth, isOpen, setOpen }) => {
 
 interface HeaderProps {
   windowWidth: number;
-  isOpen: boolean;
-  setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleSearch: (e: any) => void;
 }
 
 export default Header;

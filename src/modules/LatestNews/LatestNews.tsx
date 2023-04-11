@@ -15,10 +15,11 @@ const LatestNews = () => {
         </div>
         <h2 className={styles["LatestNews-Title"]}>Latest news</h2>
       </div>
+
       <div className={styles["LatestNews-Board"]}>
-        {newsData.map(({ id, title, publishedDate }) => (
+        {newsData.map(({ title, publishedDate }, index) => (
           <LatestNewsArticle
-            key={id}
+            key={index}
             title={title}
             publishedDate={publishedDate}
           />
