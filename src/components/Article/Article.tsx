@@ -3,9 +3,9 @@ import styles from "./Article.module.scss";
 import Image from "next/image";
 import FavouriteIcon from "../../../public/assets/icons/FavouriteIcon.svg";
 import { FC } from "react";
+import placeholder from "../../../public/assets/images/placeholder.png";
 
 const Article: FC<ArticleProps> = ({
-  id,
   section,
   title,
   imageCaption,
@@ -17,8 +17,8 @@ const Article: FC<ArticleProps> = ({
       <Link href={"#"}>
         <figure className={styles["Article-Figure"]}>
           <Image
-            src={imageUrl}
-            alt={imageCaption}
+            src={imageUrl ? imageUrl : placeholder}
+            alt={imageCaption ? imageCaption : "No caption"}
             className={styles["Article-Image"]}
             width={440}
             height={293}
@@ -38,7 +38,6 @@ const Article: FC<ArticleProps> = ({
 };
 
 interface ArticleProps {
-  id?: number;
   section: string;
   title: string;
   imageCaption: string;

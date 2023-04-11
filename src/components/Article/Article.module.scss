@@ -97,6 +97,11 @@
       line-height: 14px;
       font-weight: 300;
       margin-top: auto;
+
+      display: -webkit-box;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
 }
