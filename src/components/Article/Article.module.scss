@@ -4,7 +4,7 @@
   margin: 0 auto;
 
   @include mobileLarge {
-    width: 343px;
+    max-width: 343px;
     height: 260px;
   }
 

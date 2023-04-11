@@ -13,8 +13,9 @@ import { useAppDispatch, useAppSelector } from "@/utility/hooks";
 import ToggleNews from "@/modules/ToggleNews/ToggleNews";
 import { NewsItem } from "@/redux/reducer/fetchNewsDataReducer";
 
-export default function Buisness() {
+export default function Home() {
   const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
+  const [showLatestNews, setShowLatestNews] = useState<boolean>(false);
   const [data, setData] = useState<NewsItem[]>([]);
 
   const dispatch = useAppDispatch();
@@ -62,25 +63,35 @@ export default function Buisness() {
         <HomepagePopup setIsDisplayed={setIsDisplayed} />
       )}
       <Header windowWidth={windowWidth} handleSearch={handleSearch} />
-      {windowWidth < 768 && <ToggleNews windowWidth={windowWidth} />}
+      {windowWidth < 768 && (
+        <ToggleNews
+          windowWidth={windowWidth}
+          showLatestNews={showLatestNews}
+          setShowLatestNews={setShowLatestNews}
+        />
+      )}
       <Section>
         {windowWidth > 768 && <NavBar />}
         <Grid title={windowWidth > 768 ? "News" : ""}>
           {windowWidth > 768 && <LatestNews />}
-          {data
-            .filter(item => item.section.toLocaleLowerCase() === "science")
-            .map(
-              ({ section, title, imageCaption, imageUrl, author }, index) => (
-                <Article
-                  key={index}
-                  title={title}
-                  section={section}
-                  imageCaption={imageCaption}
-                  imageUrl={imageUrl}
-                  author={author}
-                />
+          {showLatestNews ? (
+            <LatestNews />
+          ) : (
+            data
+              .filter(item => item.section.toLocaleLowerCase() === "science")
+              .map(
+                ({ section, title, imageCaption, imageUrl, author }, index) => (
+                  <Article
+                    key={index}
+                    title={title}
+                    section={section}
+                    imageCaption={imageCaption}
+                    imageUrl={imageUrl}
+                    author={author}
+                  />
+                )
               )
-            )}
+          )}
         </Grid>
       </Section>
     </>

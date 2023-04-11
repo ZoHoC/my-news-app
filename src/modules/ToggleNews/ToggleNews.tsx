@@ -3,7 +3,11 @@ import styles from "./ToggleNews.module.scss";
 import { toggleNewsData, toggleNewsDataItem } from "@/utility/toggleNewsData";
 import LatestNews from "../LatestNews/LatestNews";
 
-const ToggleNews: FC<ToggleNewsProps> = ({ windowWidth }) => {
+const ToggleNews: FC<ToggleNewsProps> = ({
+  windowWidth,
+  showLatestNews,
+  setShowLatestNews,
+}) => {
   const [data, setData] = useState<toggleNewsDataItem[]>(toggleNewsData);
 
   useEffect(() => {
@@ -17,6 +21,7 @@ const ToggleNews: FC<ToggleNewsProps> = ({ windowWidth }) => {
         : { ...item, isPressed: false }
     );
     setData(updatedData);
+    id === 2 ? setShowLatestNews(true) : setShowLatestNews(false);
   };
 
   return (
@@ -34,17 +39,14 @@ const ToggleNews: FC<ToggleNewsProps> = ({ windowWidth }) => {
           </div>
         ))}
       </div>
-      {windowWidth < 768 && data[1].isPressed && (
-        <div className={styles["ToggleNews-LatestNews"]}>
-          <LatestNews />
-        </div>
-      )}
     </div>
   );
 };
 
 interface ToggleNewsProps {
   windowWidth: number;
+  showLatestNews: boolean;
+  setShowLatestNews: any;
 }
 
 export default ToggleNews;

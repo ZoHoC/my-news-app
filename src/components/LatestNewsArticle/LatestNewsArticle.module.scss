@@ -6,7 +6,7 @@
   background-color: $secondary-bg-color;
 
   @include mobileLarge {
-    width: 311px;
+    max-width: 311px;
   }
 
   @include desktop {
