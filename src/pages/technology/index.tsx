@@ -74,7 +74,7 @@ export default function Home() {
         {windowWidth > 768 && <NavBar />}
         <Grid title={windowWidth > 768 ? "News" : ""}>
           {windowWidth > 768 && <LatestNews />}
-          {showLatestNews ? (
+          {windowWidth < 768 && showLatestNews ? (
             <LatestNews />
           ) : (
             data
