@@ -1,11 +1,17 @@
 @use "@/styles/abstracts/index.module" as *;
 
 .ToggleNews {
-  padding: 16px 0 26px;
-
+  padding: 16px 0 0;
   display: flex;
-  justify-content: center;
-  gap: 16px;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+
+  &-Inner {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
 
   &-Text {
     padding: 10px 16px;
@@ -16,5 +22,13 @@
       color: $accent-color;
       background-color: rgba(187, 30, 30, 0.24);
     }
+  }
+
+  &-LatestNews {
+    position: fixed;
+    top: 250px;
+    height: 100%;
+    z-index: 99;
+    background-color: $primary-bg-color;
   }
 }
