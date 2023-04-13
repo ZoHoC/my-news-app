@@ -3,7 +3,7 @@ import SearchIcon from "../../../public/assets/icons/SearchIcon.svg";
 import Button from "@/components/Button/Button";
 import { FC } from "react";
 
-const SearchBar: FC<SearchBarProps> = ({ windowWidth, handleSearch }) => {
+const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
   return (
     <div className={styles["SearchBar"]}>
       <SearchIcon />
@@ -12,13 +12,14 @@ const SearchBar: FC<SearchBarProps> = ({ windowWidth, handleSearch }) => {
         className={styles["SearchBar-Input"]}
         onChange={handleSearch}
       />
-      {windowWidth > 768 && <Button>search</Button>}
+      <div className={styles["SearchBar-Button"]}>
+        <Button>search</Button>
+      </div>
     </div>
   );
 };
 
 interface SearchBarProps {
-  windowWidth: number;
   handleSearch: (e: any) => void;
 }
 

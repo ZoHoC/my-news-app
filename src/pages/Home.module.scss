@@ -1,0 +1,33 @@
+@use "@/styles/abstracts/index.module" as *;
+
+.Home {
+  &-ToggleNews {
+    @include tablet {
+      display: none;
+    }
+  }
+
+  &-NavBar {
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
+  }
+
+  &-LatestNews {
+    display: none;
+
+    @include tablet {
+      display: block;
+
+      grid-area: aside;
+    }
+
+    &_mobile {
+      @include tablet {
+        display: none;
+      }
+    }
+  }
+}

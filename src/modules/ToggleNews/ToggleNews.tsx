@@ -1,18 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./ToggleNews.module.scss";
 import { toggleNewsData, toggleNewsDataItem } from "@/utility/toggleNewsData";
-import LatestNews from "../LatestNews/LatestNews";
 
-const ToggleNews: FC<ToggleNewsProps> = ({
-  windowWidth,
-  showLatestNews,
-  setShowLatestNews,
-}) => {
+const ToggleNews: FC<ToggleNewsProps> = ({ setShowLatestNews }) => {
   const [data, setData] = useState<toggleNewsDataItem[]>(toggleNewsData);
 
   useEffect(() => {
     document.body.style.overflow = data[1].isPressed ? "hidden" : "";
-  }, [data[1].isPressed, windowWidth]);
+  }, [data[1].isPressed]);
 
   const handleClick = (id: number) => {
     const updatedData = data.map(item =>
@@ -44,9 +39,7 @@ const ToggleNews: FC<ToggleNewsProps> = ({
 };
 
 interface ToggleNewsProps {
-  windowWidth: number;
-  showLatestNews: boolean;
-  setShowLatestNews: any;
+  setShowLatestNews: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 export default ToggleNews;

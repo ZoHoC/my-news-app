@@ -37,4 +37,12 @@
     outline: none;
     line-height: 16px;
   }
+
+  &-Button {
+    display: none;
+
+    @include tablet {
+      display: block;
+    }
+  }
 }
