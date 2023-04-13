@@ -2,8 +2,11 @@ import Link from "next/link";
 import styles from "./Article.module.scss";
 import Image from "next/image";
 import FavouriteIcon from "../../../public/assets/icons/FavouriteIcon.svg";
+import FavouriteIconFull from "../../../public/assets/icons/FavouriteIconFull.svg";
 import { FC } from "react";
 import placeholder from "../../../public/assets/images/placeholder.png";
+import { useAppDispatch } from "@/utility/hooks";
+import { toggleFavourite } from "@/redux/reducer/fetchNewsDataReducer";
 
 const Article: FC<ArticleProps> = ({
   section,
@@ -11,7 +14,17 @@ const Article: FC<ArticleProps> = ({
   imageCaption,
   imageUrl,
   author,
+  id,
+  isFavourite,
 }) => {
+  const dispatch = useAppDispatch();
+
+  const handleIconClick = (event: React.MouseEvent<HTMLDivElement>) => {
+    event.stopPropagation();
+    event.preventDefault();
+    dispatch(toggleFavourite(id));
+  };
+
   return (
     <article className={styles["Article"]}>
       <Link href={"#"}>
@@ -27,7 +40,9 @@ const Article: FC<ArticleProps> = ({
         <div className={styles["Article-Wrapper"]}>
           <div className={styles["Article-Container"]}>
             <p className={styles["Article-NewsSection"]}>{section}</p>
-            <FavouriteIcon />
+            <div className={styles["Article-Icon"]} onClick={handleIconClick}>
+              {isFavourite ? <FavouriteIconFull /> : <FavouriteIcon />}
+            </div>
           </div>
           <h2 className={styles["Article-Title"]}>{title}</h2>
           <p className={styles["Article-Author"]}>{author}</p>
@@ -43,6 +58,8 @@ interface ArticleProps {
   imageCaption: string;
   imageUrl: string;
   author: string;
+  id: string;
+  isFavourite: boolean;
 }
 
 export default Article;
