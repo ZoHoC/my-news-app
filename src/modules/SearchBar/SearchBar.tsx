@@ -1,7 +1,7 @@
 import styles from "./SearchBar.module.scss";
 import SearchIcon from "../../../public/assets/icons/SearchIcon.svg";
 import Button from "@/components/Button/Button";
-import { FC } from "react";
+import { FC, SyntheticEvent } from "react";
 
 const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
   return (
@@ -20,7 +20,7 @@ const SearchBar: FC<SearchBarProps> = ({ handleSearch }) => {
 };
 
 interface SearchBarProps {
-  handleSearch: (e: any) => void;
+  handleSearch: (e: SyntheticEvent<HTMLInputElement>) => void;
 }
 
 export default SearchBar;

@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, SyntheticEvent, useEffect, useState } from "react";
 import SearchBar from "../SearchBar/SearchBar";
 import styles from "./Header.module.scss";
 import { Squash as Hamburger } from "hamburger-react";
@@ -48,7 +48,7 @@ const Header: FC<HeaderProps> = ({ handleSearch }) => {
 };
 
 interface HeaderProps {
-  handleSearch: (e: any) => void;
+  handleSearch: (e: SyntheticEvent<HTMLInputElement>) => void;
 }
 
 export default Header;
