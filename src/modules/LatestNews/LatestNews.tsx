@@ -8,7 +8,7 @@ import { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const LatestNews = () => {
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState<boolean>(true);
   const { newsData } = useAppSelector(state => state.news);
   const dispatch = useAppDispatch();
 
@@ -39,9 +39,9 @@ const LatestNews = () => {
           loader={<h4>Loading...</h4>}
           endMessage={<p>No more news to show.</p>}
         >
-          {newsData.map(({ title, publishedDate }, index) => (
+          {newsData.map(({ title, publishedDate, id }) => (
             <LatestNewsArticle
-              key={index}
+              key={id}
               title={title}
               publishedDate={publishedDate}
             />

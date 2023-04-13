@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-
 import fetchNewsDataReducer, {
   NewsState,
 } from "./reducer/fetchNewsDataReducer";
