@@ -1,51 +1,61 @@
 import Head from "next/head";
-import { useEffect, useState } from "react";
+import { SyntheticEvent, useEffect, useRef, useState } from "react";
 import HomepagePopup from "@/components/HomepagePopup/HomepagePopup";
 import Header from "@/modules/Header/Header";
 import Section from "@/components/Section/Section";
 import NavBar from "@/modules/NavBar/NavBar";
 import Grid from "@/components/Grid/Grid";
 import LatestNews from "@/modules/LatestNews/LatestNews";
-import { setWindowWidth } from "@/redux/reducer/windowSizeReducer";
 import Article from "@/components/Article/Article";
 import { fetchNewsData } from "@/redux/actions/fetchNewsDataAction";
 import { useAppDispatch, useAppSelector } from "@/utility/hooks";
 import ToggleNews from "@/modules/ToggleNews/ToggleNews";
 import { NewsItem } from "@/redux/reducer/fetchNewsDataReducer";
+import styles from "../Home.module.scss";
 
 export default function Home() {
   const [isDisplayed, setIsDisplayed] = useState<boolean>(false);
   const [showLatestNews, setShowLatestNews] = useState<boolean>(false);
   const [data, setData] = useState<NewsItem[]>([]);
+  const shouldDispatch = useRef<boolean>(true);
 
   const dispatch = useAppDispatch();
-  const { windowWidth } = useAppSelector(state => state.windowSize);
   const { newsData } = useAppSelector(state => state.news);
 
   useEffect(() => {
-    dispatch(setWindowWidth(window.innerWidth));
-    dispatch(fetchNewsData());
+    if (shouldDispatch.current) {
+      dispatch(
+        fetchNewsData({
+          section: "business",
+          limit: 10,
+          offset: newsData.length,
+        })
+      );
+      shouldDispatch.current = false;
+    }
   }, []);
 
   useEffect(() => {
-    setData(newsData);
+    setData(
+      newsData
+        .slice()
+        .sort(
+          (a, b) =>
+            new Date(b.publishedDate).getTime() -
+            new Date(a.publishedDate).getTime()
+        )
+    );
   }, [newsData]);
-
-  useEffect(() => {
-    const handleResize = () => dispatch(setWindowWidth(window.innerWidth));
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
 
   useEffect(() => {
     const isDisplayedToken = localStorage.getItem("displayToken") === null;
     setIsDisplayed(isDisplayedToken);
   }, []);
 
-  const handleSearch = (e: any) => {
+  const handleSearch = (e: SyntheticEvent<HTMLInputElement>) => {
     setData(
       newsData.filter(news =>
-        news.title.toLowerCase().includes(e.target.value.toLowerCase())
+        news.title.toLowerCase().includes(e.currentTarget.value.toLowerCase())
       )
     );
   };
@@ -59,41 +69,53 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      {windowWidth > 1200 && isDisplayed && (
-        <HomepagePopup setIsDisplayed={setIsDisplayed} />
-      )}
-      <Header windowWidth={windowWidth} handleSearch={handleSearch} />
-      {windowWidth < 768 && (
-        <ToggleNews
-          windowWidth={windowWidth}
-          showLatestNews={showLatestNews}
-          setShowLatestNews={setShowLatestNews}
-        />
-      )}
-      <Section>
-        {windowWidth > 768 && <NavBar />}
-        <Grid title={windowWidth > 768 ? "News" : ""}>
-          {windowWidth > 768 && <LatestNews />}
-          {windowWidth < 768 && showLatestNews ? (
-            <LatestNews />
-          ) : (
-            data
-              .filter(item => item.section.toLocaleLowerCase() === "business")
-              .map(
-                ({ section, title, imageCaption, imageUrl, author }, index) => (
-                  <Article
-                    key={index}
-                    title={title}
-                    section={section}
-                    imageCaption={imageCaption}
-                    imageUrl={imageUrl}
-                    author={author}
-                  />
+      {isDisplayed && <HomepagePopup setIsDisplayed={setIsDisplayed} />}
+      <Header handleSearch={handleSearch} />
+      <main className={styles["Home"]}>
+        <div className={styles["Home-ToggleNews"]}>
+          <ToggleNews setShowLatestNews={setShowLatestNews} />
+        </div>
+        <Section>
+          <div className={styles["Home-NavBar"]}>
+            <NavBar />
+          </div>
+          <Grid title={"News"}>
+            <div className={styles["Home-LatestNews"]}>
+              <LatestNews />
+            </div>
+            {showLatestNews ? (
+              <div className={styles["Home-LatestNews_mobile"]}>
+                <LatestNews />
+              </div>
+            ) : (
+              data
+                .filter(item => item.section.toLocaleLowerCase() === "business")
+                .map(
+                  ({
+                    section,
+                    title,
+                    imageCaption,
+                    imageUrl,
+                    author,
+                    isFavourite,
+                    id,
+                  }) => (
+                    <Article
+                      key={id}
+                      title={title}
+                      section={section}
+                      imageCaption={imageCaption}
+                      imageUrl={imageUrl}
+                      author={author}
+                      isFavourite={isFavourite}
+                      id={id}
+                    />
+                  )
                 )
-              )
-          )}
-        </Grid>
-      </Section>
+            )}
+          </Grid>
+        </Section>
+      </main>
     </>
   );
 }
