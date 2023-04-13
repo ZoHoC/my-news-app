@@ -67,6 +67,7 @@ const navDataSlice = createSlice({
     },
   },
 });
+
 export interface NavDataState {
   navData: NavDataItem[];
 }
