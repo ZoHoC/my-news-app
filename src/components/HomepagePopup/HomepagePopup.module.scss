@@ -1,34 +1,38 @@
 @use "@/styles/abstracts/index.module" as *;
 
 .HomepagePopup {
-  height: 0;
+  display: none;
 
-  background: linear-gradient(
-    180deg,
-    $accent-bg-color 71.29%,
-    $accent-bg-gradient-color 99.95%
-  );
+  @include desktopLarge {
+    display: block;
+    height: 0;
 
-  display: flex;
-  justify-content: center;
+    background: linear-gradient(
+      180deg,
+      $accent-bg-color 71.29%,
+      $accent-bg-gradient-color 99.95%
+    );
 
-  overflow: hidden;
-  animation-name: slideIn;
-  animation-duration: 750ms;
-  animation-timing-function: ease-in-out;
-  animation-fill-mode: forwards;
+    display: flex;
+    justify-content: center;
 
-  @keyframes slideIn {
-    from {
-      height: 0;
-    }
-    to {
-      height: 60px;
+    overflow: hidden;
+    animation-name: slideIn;
+    animation-duration: 750ms;
+    animation-timing-function: ease-in-out;
+    animation-fill-mode: forwards;
+
+    @keyframes slideIn {
+      from {
+        height: 0;
+      }
+      to {
+        height: 60px;
+      }
     }
   }
 
   &_overlay {
-    // height: 100%;
     width: 100%;
 
     z-index: 99;

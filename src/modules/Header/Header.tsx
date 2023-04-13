@@ -5,13 +5,12 @@ import { Squash as Hamburger } from "hamburger-react";
 import colorStyles from "@/styles/abstracts/colorStyles";
 import NavBar from "../NavBar/NavBar";
 
-const Header: FC<HeaderProps> = ({ windowWidth, handleSearch }) => {
+const Header: FC<HeaderProps> = ({ handleSearch }) => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    document.body.style.overflow =
-      windowWidth < 768 ? (isOpen ? "hidden" : "") : (setOpen(false), "");
-  }, [isOpen, windowWidth]);
+    document.body.style.overflow = isOpen ? "hidden" : "";
+  }, [isOpen]);
 
   return (
     <header className={styles["Header"]}>
@@ -26,7 +25,7 @@ const Header: FC<HeaderProps> = ({ windowWidth, handleSearch }) => {
           <p className={styles["Header-Title"]}>
             <span className={styles["Header-Title_accent"]}>My</span>News
           </p>
-          {windowWidth < 768 && (
+          <div className={styles["Header-Hamburger"]}>
             <Hamburger
               size={24}
               color={colorStyles.primaryColor}
@@ -35,11 +34,11 @@ const Header: FC<HeaderProps> = ({ windowWidth, handleSearch }) => {
               rounded
               hideOutline={false}
             />
-          )}
+          </div>
         </div>
-        <SearchBar windowWidth={windowWidth} handleSearch={handleSearch} />
+        <SearchBar handleSearch={handleSearch} />
       </div>
-      {windowWidth < 768 && isOpen && (
+      {isOpen && (
         <div className={styles["Header-Navbar"]}>
           <NavBar />
         </div>
@@ -49,7 +48,6 @@ const Header: FC<HeaderProps> = ({ windowWidth, handleSearch }) => {
 };
 
 interface HeaderProps {
-  windowWidth: number;
   handleSearch: (e: any) => void;
 }
 

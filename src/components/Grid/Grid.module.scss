@@ -31,7 +31,12 @@
   }
 
   &-Title {
-    font-size: 18px;
-    line-height: 24px;
+    display: none;
+
+    @include tablet {
+      display: block;
+      font-size: 18px;
+      line-height: 24px;
+    }
   }
 }

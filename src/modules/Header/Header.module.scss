@@ -16,7 +16,7 @@
     @include tablet {
       max-width: 1100px;
       margin: 0 20px;
-      padding: 35px 0 28px;
+      padding: 35px 16px 28px;
       border-bottom: 1px solid $tertiary-color;
 
       flex-direction: row;
@@ -66,6 +66,12 @@
     }
   }
 
+  &-Hamburger {
+    @include tablet {
+      display: none;
+    }
+  }
+
   &-Navbar {
     position: fixed;
     top: 203px;
@@ -74,5 +80,9 @@
     height: 100%;
     z-index: 1000;
     background-color: $primary-bg-color;
+
+    @include tablet {
+      display: none;
+    }
   }
 }

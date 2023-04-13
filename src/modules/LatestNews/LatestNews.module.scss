@@ -8,8 +8,6 @@
 
   background-color: $secondary-bg-color;
 
-  grid-area: aside;
-
   @include mobileLarge {
     max-width: 343px;
   }
@@ -51,7 +49,7 @@
 
   &-Board {
     height: 429px;
-    overflow: scroll;
+    overflow: auto;
     -ms-overflow-style: none; /* Internet Explorer 10+ */
     scrollbar-width: none; /* Firefox */
     ::-webkit-scrollbar {
