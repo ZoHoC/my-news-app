@@ -1,8 +1,11 @@
 {
   "name": "my-news-app",
+  "homepage": "https://ZoHoC.github.io/ime-repozitorija",
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
@@ -26,6 +29,7 @@
   },
   "devDependencies": {
     "@svgr/webpack": "^7.0.0",
+    "gh-pages": "^5.0.0",
     "sass": "^1.61.0"
   }
 }
